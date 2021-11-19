@@ -10,3 +10,4 @@ PSO, because it was initially intented to simulate social behavior, exhibits beh
 Learn more about PSO here: https://en.wikipedia.org/wiki/Particle_swarm_optimization
 
 <h2>Part 1: Cursor Following<h2>
+![Alt Text](https://media.giphy.com/media/cARB8tmBBOPd9ZoQ2X/giphy.gif)\
