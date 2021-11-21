@@ -23,3 +23,12 @@ The first part is a cursor-following visualization. Each of the individual parti
 <h2>Part 2: Linear Regression</h2>
 
 The second part is a implementation of simple linear regression. In the previous example, the reward of a particle was calculated by the euclidian distance between it and the target. In this case, the algorithm uses RMSE (Root Mean Squared Error) to determine how well a line fits a particular set of points. Each particle has an associated slope and y-intercept, analagous to how each particle had a (x,y) location in the cursor-following example
+
+
+<h2>What do the Hyperparameters Mean?</h2>
+
+Hyperparameters, unlike the individual (x,y) velocities of the individual particles, dictate how the swarm, as a whole, operates.  
+  
+<strong>Inertia</strong>: Inertia represents a particle's willingness to change direction. A low inertia leads to sharper turns, and vice versa.
+<strong>Personal Best Coefficient</strong>: How much a particle is drawn to the best solution its discovered so far. Too high of a personal best coefficient leads to excess wandering, and the swarm might not converge or take a long time to converge.
+<strong>Global Best Coefficient</strong>: How much a particle is drawn to the best solution the swarm has discovered so far. If this is too high, particles will converge prematurely. If this is too low, then particles will wander aimlessly.
