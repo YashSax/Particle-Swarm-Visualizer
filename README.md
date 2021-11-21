@@ -9,5 +9,15 @@ PSO, because it was initially intented to simulate social behavior, exhibits beh
 
 Learn more about PSO here: https://en.wikipedia.org/wiki/Particle_swarm_optimization
 
-<h2>Part 1: Cursor Following<h2>
-![Alt Text](https://media.giphy.com/media/cARB8tmBBOPd9ZoQ2X/giphy.gif)\
+<h2>Part 1: Cursor Following</h2>
+
+
+https://user-images.githubusercontent.com/46911428/142749902-4132e251-86ac-4139-a384-35d60ed70ab0.mp4
+
+<p>The first part of the project is a cursor-following visualization. Each of the individual particles try to minimize the distance between themselves and the red circle. Each particle's velocity is governed by three simple rules:  </p>  
+  
+  1) Each particle has an inertia that, like in the physical world, specifies its resistance to changing directions.
+  2) Each particle is drawn, with a certain coefficient c<sub>1</sub>, to the best (highest reward) position it's discovered.
+  3) Each particle is also drawn, with a certain coefficient c<sub>2</sub>, to the best (highest reward) position the swarm, as a whole, has discovered.
+
+<h2>Part 2: Linear Regression</h2>
