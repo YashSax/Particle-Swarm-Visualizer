@@ -150,6 +150,7 @@ let w = 0.9; // 0.9
 let c1 = 0.1; // 0.1 if this is too high, there's excess wandering
 let c2 = 0.02; // 0.1 if this is too high, particles converge prematurely
 let n = 50;
+let PARAM_SUM = w + c1 + c2;
 
 let interceptInitialVelocity = 10; // 5
 let slopeInitialVelocity = 0.3; // 0.1
@@ -430,7 +431,9 @@ function draw() {
     particles.forEach((particle) => {
       for (let i = 0; i < particle.startPoints.length; i++) {
         stroke(particle.errors[i]);
-        line(particle.startPoints[i][0], particle.startPoints[i][1], particle.endPoints[i][0], particle.endPoints[i][1]);
+        if (particle.startPoints[i][0] > CANVAS_X / 2 && particle.endPoints[i][0] > CANVAS_X / 2) {
+          line(particle.startPoints[i][0], particle.startPoints[i][1], particle.endPoints[i][0], particle.endPoints[i][1]);
+        }
       }
     });
     stroke(0);
@@ -449,10 +452,17 @@ function draw() {
 
   // Hyperparameters
 
-  w = inertiaInput.value(); // 0.4
-  c1 = personalInput.value(); // 0.5
-  c2 = globalInput.value(); // 0.4
+  w = parseFloat(inertiaInput.value()); // 0.4
+  c1 = parseFloat(personalInput.value()); // 0.5
+  c2 = parseFloat(globalInput.value()); // 0.4
   n = numParticleInput.value();
+
+  let updatedSum = w + c1 + c2;
+  let correctionFactor = PARAM_SUM / updatedSum;
+  w *= correctionFactor;
+  c1 *= correctionFactor;
+  c2 *= correctionFactor;
+
   if (w < 0 || w > 1) {
     w = constrain(w, 0, 1);
     inertiaInput.value(`${w}`);
