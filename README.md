@@ -14,10 +14,12 @@ Learn more about PSO here: https://en.wikipedia.org/wiki/Particle_swarm_optimiza
 
 https://user-images.githubusercontent.com/46911428/142749902-4132e251-86ac-4139-a384-35d60ed70ab0.mp4
 
-<p>The first part of the project is a cursor-following visualization. Each of the individual particles try to minimize the distance between themselves and the red circle. Each particle's velocity is governed by three simple rules:  </p>  
+The first part is a cursor-following visualization. Each of the individual particles try to minimize the distance between themselves and the red circle, their particle's velocity governed by three simple rules:  
   
   1) Each particle has an inertia that, like in the physical world, specifies its resistance to changing directions.
   2) Each particle is drawn, with a certain coefficient c<sub>1</sub>, to the best (highest reward) position it's discovered.
   3) Each particle is also drawn, with a certain coefficient c<sub>2</sub>, to the best (highest reward) position the swarm, as a whole, has discovered.
 
 <h2>Part 2: Linear Regression</h2>
+
+The second part is a implementation of simple linear regression. In the previous example, the reward of a particle was calculated by the euclidian distance between it and the target. In this case, the algorithm uses RMSE (Root Mean Squared Error) to determine how well a line fits a particular set of points. Each particle has an associated slope and y-intercept, analagous to how each particle had a (x,y) location in the cursor-following example
