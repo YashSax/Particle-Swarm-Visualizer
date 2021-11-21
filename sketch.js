@@ -119,6 +119,7 @@ let w = 0.9;
 let c1 = 0.1; // if this is too high, there's excess wandering
 let c2 = 0.1; // if this is too high, particles converge prematurely
 let splat = 0.1; // range of inital velocity upon target change
+let PARAM_SUM = w + c1 + c2;
 
 let m = false;
 
@@ -138,7 +139,6 @@ function renderArrow(element) {
   let bNew = map(magnitude, 0, maxMagnitude, b1, b2);
 
   drawArrow(v0, v1, color(rNew, gNew, bNew));
-  noStroke();
 }
 
 function drawArrow(base, vec, myColor) {
@@ -169,7 +169,7 @@ function mouseClicked() {
 }
 
 function clickAllowed() {
-  if (mouseX > 300 || mouseY > 200 || mouseX < 10 || mouseY < 10) {
+  if (mouseX > 300 || mouseY > 180 || mouseX < 10 || mouseY < 10) {
     return true;
   } else {
     return false;
@@ -177,13 +177,18 @@ function clickAllowed() {
 }
 
 
-// // trying things out
+// viewed flag
+let viewed = true;
 // if(sessionStorage.getItem("status") == "pooped") {
-//   alert("viewed")
+//   viewed = true;
 // }
 // sessionStorage.setItem("status","pooped")
 
+let firstSlide;
 
+function preload() {
+  firstSlide = loadImage("assets/FirstPSO.png");
+}
 let DOM_X_OFFSET = 30;
 let DOM_Y_OFFSET = 32;
 
@@ -211,10 +216,6 @@ function setup() {
   numParticleInput = createInput(100, "number");
   numParticleInput.position(DOM_X_OFFSET + 130, DOM_Y_OFFSET + 160);
   numParticleInput.size(50);
-
-  splatInput = createInput(0.1, "number");
-  splatInput.position(DOM_X_OFFSET + 35, DOM_Y_OFFSET + 190);
-  splatInput.size(50);
 
   for (let i = 0; i < NUM_PARTICLES; i++) {
     particles.push(new Particle(parseInt(CANVAS_X * (-1 + (2 * Math.random()))), parseInt(CANVAS_Y * (-1 + (2 * Math.random()))), 5 * (-1 + (2 * Math.random())), 5 * (-1 + (2 * Math.random()))));
@@ -250,7 +251,7 @@ function draw() {
   /* Hyperparameters START */
 
   fill("#F6F6F6")//()//(255,255,255); // TODO: Make this not shitty "#F6F6F6"
-  rect(10, 10, 300, 195, 5);
+  rect(10, 10, 300, 165, 5);
   fill(0, 0, 0);
   textSize(20);
   text("Hyperparameters", 20, 40);
@@ -259,12 +260,17 @@ function draw() {
   text("Personal Best Coefficient: ", 20, 100);
   text("Global Best Coefficient: ", 20, 130);
   text("Number of Particles: ", 20, 160);
-  text("Splat: ", 20, 190);
 
-  w = inertiaInput.value();
-  c1 = personalInput.value();
-  c2 = globalInput.value();
-  splat = splatInput.value();
+  w = parseFloat(inertiaInput.value());
+  c1 = parseFloat(personalInput.value());
+  c2 = parseFloat(globalInput.value());
+
+  let updatedSum = w + c1 + c2;
+  let correctionFactor = PARAM_SUM / updatedSum;
+  w *= correctionFactor;
+  c1 *= correctionFactor;
+  c2 *= correctionFactor;
+
   if (numParticleInput != NUM_PARTICLES && numParticleInput.value() >= 0) {
     if (numParticleInput.value() > NUM_PARTICLES) {
       for (let i = NUM_PARTICLES; i < numParticleInput.value(); i++) {
@@ -281,6 +287,7 @@ function draw() {
 
   frameRate(30);
   fill(255, 0, 0);
+  noStroke();
   ellipse(TARGET_POS_X, TARGET_POS_Y, 20, 20);
   fill(0);
   particles.forEach(element => {
@@ -288,5 +295,10 @@ function draw() {
     element.update();
   });
 
-  // showPopup();
+  if (!viewed) {
+    showPopup();
+  }
+
+  // firstSlide.resize(400, 400);
+  // image(firstSlide, CANVAS_X / 2 - 200, CANVAS_Y / 2 - 200);
 }
