@@ -29,6 +29,6 @@ The second part is a implementation of simple linear regression. In the previous
 
 Hyperparameters, unlike the individual (x,y) velocities of the individual particles, dictate how the swarm, as a whole, operates.  
   
-<strong>Inertia</strong>: Inertia represents a particle's willingness to change direction. A low inertia leads to sharper turns, and vice versa.
-<strong>Personal Best Coefficient</strong>: How much a particle is drawn to the best solution its discovered so far. Too high of a personal best coefficient leads to excess wandering, and the swarm might not converge or take a long time to converge.
-<strong>Global Best Coefficient</strong>: How much a particle is drawn to the best solution the swarm has discovered so far. If this is too high, particles will converge prematurely. If this is too low, then particles will wander aimlessly.
+<strong>Inertia</strong>: Inertia represents a particle's willingness to change direction. A low inertia leads to sharper turns, and vice versa.  
+<strong>Personal Best Coefficient</strong>: How much a particle is drawn to the best solution its discovered so far. Too high of a personal best coefficient leads to excess wandering, and the swarm might not converge or take a long time to converge.  
+<strong>Global Best Coefficient</strong>: How much a particle is drawn to the best solution the swarm has discovered so far. If this is too high, particles will converge prematurely. If this is too low, then particles will wander aimlessly.  
