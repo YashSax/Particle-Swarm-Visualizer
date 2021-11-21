@@ -1,4 +1,4 @@
-// TODO: Make this work
+// Work in Progress
 
 function setup() {
     CANVAS_X = windowWidth;
