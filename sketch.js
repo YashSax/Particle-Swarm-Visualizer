@@ -249,7 +249,7 @@ function draw() {
   background("#D9CAB3") // (197, 199, 196); //
   /* Hyperparameters START */
 
-  fill("#F6F6F6")//()//(255,255,255); // TODO: Make this not shitty "#F6F6F6"
+  fill("#F6F6F6")
   rect(10, 10, 300, 195, 5);
   fill(0, 0, 0);
   textSize(20);
