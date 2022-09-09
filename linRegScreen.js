@@ -1,10 +1,3 @@
-/** TODO:
- * Add granularity of trails -> add start point, wait x iterations, add end point
- * Maybe add points at rate relative to velocity??
- * Trails sometimes drawing in graph area
- * Inputs not scaling to canvas size
- */
-
 class Particle {
   constructor(x, y, vX = 0, vY = 0) {
     this.x = x;
@@ -156,8 +149,8 @@ let interceptInitialVelocity = 10; // 5
 let slopeInitialVelocity = 0.3; // 0.1
 
 let expanded = false;
-let showError = false;
-let showDeviations;
+let showError = true;
+let showDeviations = true;
 
 // Things for Aesthetics
 /* Aesthetics */
@@ -223,14 +216,6 @@ function showInputs() {
   numParticleInput = createInput(n.toString(), "number");
   numParticleInput.position(CANVAS_X - 290 + 145, DOM_Y_OFFSET + 160);
   numParticleInput.size(50);
-
-  showDeviations = createCheckbox('', false);
-  showDeviations.position(CANVAS_X - 290 - 13, DOM_Y_OFFSET + 185)
-  showDeviations.changed(checkEvent);
-}
-
-function checkEvent() {
-  showError = !showError;
 }
 
 function clearPoints() {
@@ -331,13 +316,10 @@ function drawArrow(base, vec, myColor) {
   strokeWeight(2.5);
   fill(myColor);
   translate(base.x, base.y);
-  if (showError) {
-    stroke(color(0, 0, 0));
-    strokeWeight(0.8);
-  } else {
-    line(0, 0, vec.x, vec.y);
-    arrowSize = 2;
-  }
+  
+  line(0, 0, vec.x, vec.y);
+  arrowSize = 2;
+  
   rotate(vec.heading());
   translate(vec.mag() - arrowSize, 0);
   triangle(0, arrowSize / 2, 0, -arrowSize / 2, arrowSize * 2, 0);
@@ -505,7 +487,6 @@ function showDropdownMenu() {
     inertiaInput.show();
     personalInput.show();
     globalInput.show();
-    showDeviations.show();
     numParticleInput.show();
     fill(246, 246, 246, 200); //(255, 255, 255); // TODO: Make this not shitty
     rect(CANVAS_X - 310, 10, 300, 180, 5);
@@ -517,7 +498,6 @@ function showDropdownMenu() {
     text("Personal Best Coefficient: ", CANVAS_X - 300, 100);
     text("Global Best Coefficient: ", CANVAS_X - 300, 130);
     text("Number of Estimators: ", CANVAS_X - 300, 160);
-    text("Show Best Fit: ", CANVAS_X - 280, 183);
     strokeWeight(5);
     dropDownLocationY = 170;
     line(dropDownLocationX, dropDownLocationY + 5, dropDownLocationX + 10, dropDownLocationY - 5);
@@ -535,7 +515,6 @@ function showDropdownMenu() {
     inertiaInput.hide();
     personalInput.hide();
     globalInput.hide();
-    showDeviations.hide();
     numParticleInput.hide();
   }
 }
