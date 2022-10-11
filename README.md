@@ -22,6 +22,9 @@ The first part is a cursor-following visualization. Each of the individual parti
 
 <h2>Part 2: Linear Regression</h2>
 
+
+https://user-images.githubusercontent.com/46911428/195008693-5146a6a6-e232-4a24-86db-2c65ab6b20e4.mp4
+
 The second part is a implementation of simple linear regression. In the previous example, the reward of a particle was calculated by the euclidian distance between it and the target. In this case, the algorithm uses RMSE (Root Mean Squared Error) to determine how well a line fits a particular set of points. Each particle has an associated slope and y-intercept, analagous to how each particle had a (x,y) location in the cursor-following example
 
 
