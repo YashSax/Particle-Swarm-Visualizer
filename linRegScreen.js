@@ -152,7 +152,6 @@ let expanded = false;
 let showError = true;
 let showDeviations = true;
 
-// Things for Aesthetics
 /* Aesthetics */
 let magnitudeCoeff = 0.01; // experimentally determined
 let r1 = 255;
@@ -161,6 +160,14 @@ let b1 = 123;
 let r2 = 255;
 let g2 = 193;
 let b2 = 68;
+
+// Tutorial
+let watchedTutorial = false;
+let tutorialImage;
+
+function preload() {
+  tutorialImage = loadImage("https://i.ibb.co/8gmjPz3/PSO-tut.png");
+}
 
 function addParticles() {
   for (let i = 0; i < NUM_PARTICLES; i++) {
@@ -199,6 +206,7 @@ function setup() {
   clearButton.position(20, 90);
   clearButton.mouseClicked(clearPoints);
 }
+
 
 function showInputs() {
   inertiaInput = createInput(w.toString(), "number");
@@ -246,6 +254,9 @@ function randRange(l, u) {
 
 let canAdd = true;
 function mouseClicked() {
+  if (!watchedTutorial) {
+    watchedTutorial = true;
+  }
   if ((mouseX >= CANVAS_X - 310 && mouseX <= CANVAS_X - 10 && mouseY <= 50 && mouseY >= 10) || mouseX >= dropDownLocationX && mouseX <= dropDownLocationX + 20 && mouseY <= dropDownLocationY + 5 && mouseY >= dropDownLocationY + -7) {
     expanded = !expanded;
   }
@@ -255,9 +266,9 @@ function mouseClicked() {
     if (mouseX <= CANVAS_X / 2 - 10 && mouseY >= 0 && adjustedCoordinates[0] >= 0 && adjustedCoordinates[1] >= 0) {
       adjustedPoints.push(adjustedCoordinates);
       points.push([mouseX, mouseY]);
-      particles.forEach(particle => {
-        particle.reset(pointLineError(mouseX, mouseY, gBestM, gBestB) / CANVAS_Y); // CANVAS_Y is the theoretical max error
-      });
+      // particles.forEach(particle => {
+      //   particle.reset(pointLineError(mouseX, mouseY, gBestM, gBestB) / CANVAS_Y); // CANVAS_Y is the theoretical max error
+      // });
     }
   } else {
     canAdd = true;
@@ -479,6 +490,10 @@ function draw() {
   strokeWeight(0.8);
   line(10, 10, 10, CANVAS_Y - 10); // y axis
   line(10, CANVAS_Y - 10, CANVAS_X / 2 - 10, CANVAS_Y - 10); // x-axis
+
+  if (!watchedTutorial) {
+    showTutorial();
+  }
 }
 
 function showDropdownMenu() {
@@ -517,4 +532,18 @@ function showDropdownMenu() {
     globalInput.hide();
     numParticleInput.hide();
   }
+}
+
+function showTutorial() {
+  fill(200, 200, 200);
+  rect(Math.round(0.15 * windowWidth), Math.round(0.15 * windowHeight - 20), Math.round(0.7 * windowWidth), Math.round(0.75 * windowHeight), 20);
+  
+  imageMode(CENTER);
+  image(tutorialImage, Math.round(windowWidth / 2), Math.round(windowHeight / 2 - 20), Math.round(0.6 * windowWidth), Math.round(0.6 * windowHeight));
+  imageMode(CORNER);
+
+  textAlign(CENTER);
+  fill(0, 0, 0);
+  textSize(30);
+  text("Click anywhere to continue", Math.round(windowWidth / 2), Math.round(0.87 * windowHeight - 20));
 }
