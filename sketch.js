@@ -177,13 +177,6 @@ function clickAllowed() {
 }
 
 
-// // trying things out
-// if(sessionStorage.getItem("status") == "pooped") {
-//   alert("viewed")
-// }
-// sessionStorage.setItem("status","pooped")
-
-
 let DOM_X_OFFSET = 30;
 let DOM_Y_OFFSET = 32;
 
