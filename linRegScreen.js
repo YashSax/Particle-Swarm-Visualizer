@@ -191,7 +191,7 @@ function setup() {
   DOM_Y_OFFSET = 32;
 
   dropDownLocationX = CANVAS_X - 50;
-  dropDownLocationY = 170;
+  dropDownLocationY = 200;
 
   addParticles();
 
@@ -210,19 +210,19 @@ function setup() {
 
 function showInputs() {
   inertiaInput = createInput(w.toString(), "number");
-  inertiaInput.position(CANVAS_X - 290 + 40, DOM_Y_OFFSET + 70);
+  inertiaInput.position(CANVAS_X - 120 + 40, DOM_Y_OFFSET + 70);
   inertiaInput.size(50);
 
   personalInput = createInput(c1.toString(), "number");
-  personalInput.position(CANVAS_X - 290 + 165, DOM_Y_OFFSET + 100);
+  personalInput.position(CANVAS_X - 120 + 40, DOM_Y_OFFSET + 100);
   personalInput.size(50);
 
   globalInput = createInput(c2.toString(), "number");
-  globalInput.position(CANVAS_X - 290 + 150, DOM_Y_OFFSET + 130);
+  globalInput.position(CANVAS_X - 120 + 40, DOM_Y_OFFSET + 130);
   globalInput.size(50);
 
   numParticleInput = createInput(n.toString(), "number");
-  numParticleInput.position(CANVAS_X - 290 + 145, DOM_Y_OFFSET + 160);
+  numParticleInput.position(CANVAS_X - 120 + 40, DOM_Y_OFFSET + 160);
   numParticleInput.size(50);
 }
 
@@ -377,9 +377,6 @@ function draw() {
     particles.forEach(particle => {
       drawLine(particle.x, particle.y);
       particle.update();
-      if (particle.startPoints.length != particle.endPoints.length) {
-        console.log("WOOOOO WOOOOO");
-      }
     });
   }
 
@@ -503,18 +500,20 @@ function showDropdownMenu() {
     personalInput.show();
     globalInput.show();
     numParticleInput.show();
-    fill(246, 246, 246, 200); //(255, 255, 255); // TODO: Make this not shitty
-    rect(CANVAS_X - 310, 10, 300, 180, 5);
+    fill(246, 246, 246, 200); //(255, 255, 255);
+    rect(CANVAS_X - 310, 10, 300, 200 , 5);
     fill(0, 0, 0);
     textSize(20);
-    text("Hyperparameters", CANVAS_X - 300, 40);
+    text("Hyperparameters", CANVAS_X - 140, 40);
     textSize(15);
+    textAlign(LEFT);
     text("Inertia: ", CANVAS_X - 300, 70);
     text("Personal Best Coefficient: ", CANVAS_X - 300, 100);
     text("Global Best Coefficient: ", CANVAS_X - 300, 130);
     text("Number of Estimators: ", CANVAS_X - 300, 160);
+    textAlign(CENTER);  
     strokeWeight(5);
-    dropDownLocationY = 170;
+    dropDownLocationY = 190;
     line(dropDownLocationX, dropDownLocationY + 5, dropDownLocationX + 10, dropDownLocationY - 5);
     line(dropDownLocationX + 10, dropDownLocationY - 5, dropDownLocationX + 20, dropDownLocationY + 5);
   } else {
@@ -522,7 +521,7 @@ function showDropdownMenu() {
     rect(CANVAS_X - 310, 10, 300, 50, 5);
     fill(0, 0, 0);
     textSize(20);
-    text("Hyperparameters", CANVAS_X - 300, 40);
+    text("Hyperparameters", CANVAS_X - 140, 40);
     strokeWeight(5);
     dropDownLocationY = 35;
     line(dropDownLocationX, dropDownLocationY - 5, dropDownLocationX + 10, dropDownLocationY + 5);
